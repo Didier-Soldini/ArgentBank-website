@@ -6,26 +6,28 @@ import Footer from './components/footer/Footer';
 import SignIn from './Pages/SignIn';
 import Dashboard from './Pages/Dashboard';
 import PageNotFound from './Pages/PageNotFound';
-
+import { useSelector } from 'react-redux';
 
 const App = () => {
 
- 
- 
+  const errorOccurred = false;
+  
+  const isLoggedIn = useSelector((state) => state.usersReducer.isLoggedIn);
+
   return (
     <BrowserRouter>
-      <Navigation />
+      <Navigation/>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/" element={<SignIn />} />
-        
+        <Route path="/login" element={<SignIn />} />
+       
         <Route
-          path="/"
-          element={<Dashboard />}
+          path="/login/dashboard"
+          element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />}
         />
        
-        {<Navigate to="/" />}
-        <Route path="/" element={<PageNotFound />} />
+        {errorOccurred && <Navigate to="*" />}
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />
     </BrowserRouter>
