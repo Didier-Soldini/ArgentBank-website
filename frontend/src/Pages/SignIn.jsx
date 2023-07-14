@@ -1,11 +1,12 @@
 import React from 'react';
+import Form from '../components/form/Form';
 
 const SignIn = () => {
     return (
         <>
-        <main>
-           
-        </main>
+            <main className='main bg-dark'>
+                <Form />
+            </main>
         </>
     );
 };
